@@ -1,0 +1,16 @@
+# Python-generated files
+.pytest_cache/
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local learning experiments
+cache_test.py
+indicator_test.py
+ollama_test.py
