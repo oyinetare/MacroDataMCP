@@ -1,11 +1,10 @@
 import asyncio
+import json
 
 from mcp import Client
 from ollama import AsyncClient
 
 from main import mcp
-
-import json
 
 
 async def main():
@@ -15,14 +14,16 @@ async def main():
         ollama_tools = []
 
         for tool in result.tools:
-            ollama_tools.append({
-                "type": "function",
-                "function": {
-                    "name": tool.name,
-                    "description": tool.description or "",
-                    "parameters": tool.input_schema,
-                },
-            })
+            ollama_tools.append(
+                {
+                    "type": "function",
+                    "function": {
+                        "name": tool.name,
+                        "description": tool.description or "",
+                        "parameters": tool.input_schema,
+                    },
+                }
+            )
 
         ollama = AsyncClient()
 
@@ -61,11 +62,13 @@ async def main():
                 else {"error": str(tool_result.content)}
             )
 
-            messages.append({
-                "role": "tool",
-                "tool_name": name,
-                "content": json.dumps(content),
-            })
+            messages.append(
+                {
+                    "role": "tool",
+                    "tool_name": name,
+                    "content": json.dumps(content),
+                }
+            )
 
             print("Executed:", name)
             print("Error:", tool_result.is_error)

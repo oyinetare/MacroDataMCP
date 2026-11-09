@@ -18,6 +18,7 @@ class IndicatorResult(TypedDict):
     observations: list[Observation]
     source: str
 
+
 class CountryError(TypedDict):
     country: str
     message: str
@@ -30,6 +31,7 @@ class ComparisonResult(TypedDict):
 
 
 mcp = MCPServer("MacroData MCP")
+
 
 @mcp.tool()
 def add(a: int, b: int) -> int:
@@ -51,6 +53,7 @@ def get_indicator_tool(
     """
     return get_indicator(country, indicator, start_year, end_year)
 
+
 @mcp.tool(name="compare_countries")
 def compare_countries_tool(
     countries: list[str],
@@ -65,6 +68,7 @@ def compare_countries_tool(
         start_year,
         end_year,
     )
+
 
 @mcp.tool(name="search_indicators")
 def search_indicators_tool(query: str) -> list[dict]:
